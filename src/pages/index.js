@@ -1,6 +1,6 @@
 import SplashScreen from './SplashScreen';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import Address from './Address';
+import SignUpAddress from './SignUpAddress';
 
-export {SplashScreen, SignIn, SignUp, Address};
+export {SplashScreen, SignIn, SignUp, SignUpAddress};
