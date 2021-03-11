@@ -2,27 +2,24 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Header, TextInput, Gap, Button, Select} from '../../components';
 
-const SignUpAddress = () => {
+const SignUpAddress = ({navigation}) => {
   return (
     <View style={styles.page}>
-      <Header title="Address" subTitle="Make sure it’s valid" onBack={() => {}} />
+      <Header
+        title="Address"
+        subTitle="Make sure it’s valid"
+        onBack={() => {}}
+      />
       <View style={styles.container}>
         <TextInput label="Phone Number" placeholder="Type your phone number" />
         <Gap height={16} />
-        <TextInput
-          label="Address"
-          placeholder="Type your address"
-        />
+        <TextInput label="Address" placeholder="Type your address" />
         <Gap height={16} />
-        <TextInput
-          label="House No"
-          placeholder="Type your house number"
-        />
+        <TextInput label="House No" placeholder="Type your house number" />
         <Gap height={16} />
-        <TextInput label="City" placeholder="Select your city" />
+        <Select label="City" />
         <Gap height={24} />
-        <Select/>
-        <Button text="Sign Up Now" />
+        <Button text="Sign Up Now" onPress={()=>navigation.replace("SuccessSignUp")} />
       </View>
     </View>
   );
