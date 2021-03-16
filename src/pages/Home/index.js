@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  useWindowDimensions
+} from "react-native";
 
 import {
   FoodDummy4,
@@ -8,29 +15,28 @@ import {
   FoodDummy3,
   ProfileDummy
 } from "../../assets";
+
 import { FoodCard, Gap } from "../../components";
 import { TabView, SceneMap } from "react-native-tab-view";
 
-const FirstRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
-);
+const FirstRoute = () =>
+  <View style={{ flex: 1, backgroundColor: "#ff4081" }} />;
 
-const SecondRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-);
-const initialLayout={width:Dimensions.get('window').width}
+const SecondRoute = () =>
+  <View style={{ flex: 1, backgroundColor: "#673ab7" }} />;
+// const initialLayout = { width: Dimensions.get("window").width };
 
 const Home = () => {
-  
+  const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
+    { key: "first", title: "First" },
+    { key: "second", title: "Second" }
   ]);
 
   const renderScene = SceneMap({
     first: FirstRoute,
-    second: SecondRoute,
+    second: SecondRoute
   });
   return (
     <View>
@@ -51,12 +57,12 @@ const Home = () => {
         </View>
       </ScrollView>
       <View>
-        <TabView
-          navigationState={{ index, routes }}
-          renderScene={renderScene}
-          onIndexChange={setIndex}
-          initialLayout={{ width: layout.width }}
-        />
+      <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
       </View>
     </View>
   );
