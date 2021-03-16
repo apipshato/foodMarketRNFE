@@ -5,7 +5,7 @@ import {
   View,
   Image,
   ScrollView,
-  useWindowDimensions
+useWindowDimensions
 } from "react-native";
 
 import {
@@ -24,22 +24,24 @@ const FirstRoute = () =>
 
 const SecondRoute = () =>
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />;
-// const initialLayout = { width: Dimensions.get("window").width };
+ //const initialLayout = { width: Dimensions.get("window").width };
 
 const Home = () => {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "first", title: "First" },
-    { key: "second", title: "Second" }
+    { key: "1", title: "New Taste" },
+    { key: "2", title: "Popular" },
+    { key: "3", title: "Recommended"}
   ]);
 
   const renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute
+    1: FirstRoute,
+    2: SecondRoute,
+    3: FirstRoute,
   });
   return (
-    <View>
+    <View style={styles.page}>
       <View style={styles.profileContainer}>
         <View>
           <Text style={styles.appName}>FoodMarket</Text>
@@ -47,6 +49,7 @@ const Home = () => {
         </View>
         <Image source={ProfileDummy} style={styles.profile} />
       </View>
+      <View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={styles.foodCardContainer}>
           <Gap width={24} />
@@ -56,7 +59,9 @@ const Home = () => {
           <FoodCard image={FoodDummy4} />
         </View>
       </ScrollView>
-      <View>
+      </View>
+     
+      <View style={styles.tabContainer}>
       <TabView
       navigationState={{ index, routes }}
       renderScene={renderScene}
@@ -82,5 +87,7 @@ const styles = StyleSheet.create({
   },
   appName: { fontSize: 22, fontFamily: "Poppins-Medium", color: "#020202" },
   desc: { fontSize: 14, fontFamily: "Poppins-Light", color: "#8D92A3" },
-  foodCardContainer: { flexDirection: "row", marginVertical: 12 }
+  foodCardContainer: { flexDirection: "row", marginVertical: 12 },
+  page:{flex:1, backgroundColor:"yellow"},
+  tabContainer:{flex:1}
 });
