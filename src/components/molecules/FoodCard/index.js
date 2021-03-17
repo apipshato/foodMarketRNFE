@@ -1,23 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { FoodDummy1, IcStarOff, IcStarOn } from "../../../assets";
 
-const FoodCard = ({image}) => {
+import Rating from "../Rating";
+
+const FoodCard = ({ image }) => {
   return (
     <View style={styles.container}>
-      <Image source={image} style={styles.image}/>
+      <Image source={image} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.text}>Cherry Healty</Text>
-        <View style={styles.ratingContainer}>
-          <View style={styles.starContainer}>
-            <IcStarOn />
-            <IcStarOn />
-            <IcStarOn />
-            <IcStarOn />
-            <IcStarOff />
-          </View>
-          <Text>4.5</Text>
-        </View>
+        <Rating />
       </View>
     </View>
   );
@@ -27,7 +19,7 @@ export default FoodCard;
 
 const styles = StyleSheet.create({
   container: {
-      width:200,
+    width: 200,
     backgroundColor: "white",
     borderRadius: 8,
     shadowColor: "black",
@@ -37,11 +29,11 @@ const styles = StyleSheet.create({
     elevation: 14,
     borderRadius: 8,
     overflow: "hidden",
-    marginRight:24
+    marginRight: 24
   },
   text: { fontSize: 16, fontFamily: "Poppins-Regular", color: "#020202" },
   ratingContainer: { flexDirection: "row" },
   starContainer: { flexDirection: "row" },
-  content:{padding:12},
-  image:{width:200, height:140, resizeMode:'cover'}
+  content: { padding: 12 },
+  image: { width: 200, height: 140, resizeMode: "cover" }
 });
