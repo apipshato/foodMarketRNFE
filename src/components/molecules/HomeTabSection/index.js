@@ -1,7 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import { FoodDummy1,FoodDummy2,FoodDummy3,FoodDummy4 } from "../../../assets";
+import {
+  FoodDummy1,
+  FoodDummy2,
+  FoodDummy3,
+  FoodDummy4
+} from "../../../assets";
 import ItemListFood from "../ItemListFood";
 
 const renderTabBar = props =>
@@ -13,9 +18,15 @@ const renderTabBar = props =>
       width: "15%",
       marginLeft: "3%"
     }}
-    style={{ backgroundColor: "white" }}
+    style={{
+      backgroundColor: "white",
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomColor: "#F2F2F2",
+      borderBottomWidth: 1
+    }}
     tabStyle={{ width: "auto" }}
-    renderLabel={({ route, focused, color }) =>
+    renderLabel={({ route, focused }) =>
       <Text
         style={{
           fontFamily: "Poppins-Medium",
@@ -29,38 +40,34 @@ const renderTabBar = props =>
 const NewTaste = () => {
   return (
     <View style={{ paddingTop: 8 }}>
-    <ItemListFood image={FoodDummy1}/>
-    <ItemListFood image={FoodDummy2}/>
-    <ItemListFood image={FoodDummy3}/>
-    <ItemListFood image={FoodDummy4}/>
-      
+      <ItemListFood image={FoodDummy1} />
+      <ItemListFood image={FoodDummy2} />
+      <ItemListFood image={FoodDummy3} />
+      <ItemListFood image={FoodDummy4} />
     </View>
   );
 };
 
-const Popular = () =>{
+const Popular = () => {
   return (
     <View style={{ paddingTop: 8 }}>
-    <ItemListFood image={FoodDummy4}/>
-    <ItemListFood image={FoodDummy3}/>
-    <ItemListFood image={FoodDummy2}/>
-    <ItemListFood image={FoodDummy1}/>
-      
+      <ItemListFood image={FoodDummy4} />
+      <ItemListFood image={FoodDummy3} />
+      <ItemListFood image={FoodDummy2} />
+      <ItemListFood image={FoodDummy1} />
     </View>
   );
 };
-const Recommended = () =>{
+const Recommended = () => {
   return (
     <View style={{ paddingTop: 8 }}>
-    <ItemListFood image={FoodDummy3}/>
-    <ItemListFood image={FoodDummy4}/>
-    <ItemListFood image={FoodDummy1}/>
-    <ItemListFood image={FoodDummy2}/>
-      
+      <ItemListFood image={FoodDummy3} />
+      <ItemListFood image={FoodDummy4} />
+      <ItemListFood image={FoodDummy1} />
+      <ItemListFood image={FoodDummy2} />
     </View>
-  )
+  );
 };
-
 
 const initialLayout = { width: Dimensions.get("window").width };
 
@@ -84,6 +91,7 @@ const HomeTabSection = () => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
+      style={{ backgroundColor:"white" }}
     />
   );
 };
