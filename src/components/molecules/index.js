@@ -4,6 +4,7 @@ import FoodCard from './FoodCard'
 import HomeTabSection from "./HomeTabSection"
 import HomeProfile from "./HomeProfile"
 import ItemListFood from './ItemListFood'
+import Rating from "./Rating"
 
 export{
     Header,
@@ -11,5 +12,6 @@ export{
     FoodCard,
     HomeTabSection,
     HomeProfile,
-    ItemListFood
+    ItemListFood,
+    Rating
 }

@@ -1,11 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 import Rating from "../Rating";
 
-const ItemListFood = ({ image }) => {
+const ItemListFood = ({ image, onPress }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+      <View style={styles.container}>
       <Image source={image} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.title}>Soup Bumil</Text>
@@ -13,6 +14,8 @@ const ItemListFood = ({ image }) => {
       </View>
       <Rating />
     </View>
+    </TouchableOpacity>
+   
   );
 };
 
