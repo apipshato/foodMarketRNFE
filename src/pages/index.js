@@ -7,7 +7,7 @@ import Profile from "./Profile";
 import Order from "./Order";
 import Home from "./Home";
 import FoodDetail from "./FoodDetail";
-
+import OrderSummary from './OrderSummary'
 export {
   SplashScreen,
   SignIn,
@@ -17,5 +17,6 @@ export {
   Profile,
   Order,
   Home,
+  OrderSummary,
   FoodDetail
 };
