@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { color } from "react-native-reanimated";
+
 import { FoodDummy6, IcBackWhite } from "../../assets";
-import { Button, Rating } from "../../components";
+import { Button, Counter, Rating } from "../../components";
 
 const FoodDetail = () => {
   return (
@@ -25,7 +25,7 @@ const FoodDetail = () => {
               <Text style={styles.title}>Cherry Healty</Text>
               <Rating />
             </View>
-            <Text>Counter</Text>
+            <Counter />
           </View>
           <Text style={styles.description}>
             Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan
@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
   priceContainer: {
     flex: 1
   },
-  labelTotal:{fontSize:13, fontFamily:"Poppins-Regular",color:"#8D92A3"},
-  priceTotal:{fontSize:18, fontFamily:"Poppins-Regular", color:"#020202"}
+  labelTotal: { fontSize: 13, fontFamily: "Poppins-Regular", color: "#8D92A3" },
+  priceTotal: { fontSize: 18, fontFamily: "Poppins-Regular", color: "#020202" }
 });
