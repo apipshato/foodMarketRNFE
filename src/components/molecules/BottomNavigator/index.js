@@ -1,18 +1,25 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { IcHomeOff, IcHomeOn, IcOrderOff, IcOrderOn, IcProfileOff, IcProfileOn } from "../../../assets";
+import {
+  IcHomeOff,
+  IcHomeOn,
+  IcOrderOff,
+  IcOrderOn,
+  IcProfileOff,
+  IcProfileOn
+} from "../../../assets";
 
-const Icon = ({ label,focus }) => {
+const Icon = ({ label, focus }) => {
   switch (label) {
     case "Home":
       //
-      return focus ? <IcHomeOn /> :<IcHomeOff/> ;
+      return focus ? <IcHomeOn /> : <IcHomeOff />;
     case "Order":
       //
-      return focus ?  <IcOrderOn /> : <IcOrderOff/>;
+      return focus ? <IcOrderOn /> : <IcOrderOff />;
     case "Profile":
       //
-      return focus ? <IcProfileOn /> : <IcProfileOff/>;
+      return focus ? <IcProfileOn /> : <IcProfileOff />;
     default:
       return <IcOrderOn />;
   }
@@ -67,7 +74,7 @@ const ButtomNavigator = ({ state, descriptors, navigation }) => {
             onPress={onPress}
             onLongPress={onLongPress}
           >
-            <Icon label={label} focus={isFocused}/>
+            <Icon label={label} focus={isFocused} />
           </TouchableOpacity>
         );
       })}
