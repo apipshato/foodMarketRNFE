@@ -15,20 +15,20 @@ const OrderSummary = () => {
         <Text style={styles.label}>OrderSummary</Text>
         <ItemListFood image={FoodDummy1} items={14}/>
         <Text style={styles.label}>Detail Transaction</Text>
-        <ItemValue/>
-        <ItemValue/>
-        <ItemValue/>
-        <ItemValue/>
-        <ItemValue/>
+        <ItemValue label="Cherry Healty" value="IDR 18.390.000"/>
+        <ItemValue label="Driver" value="IDR 50.000"/>
+        <ItemValue label="Tax 10%" value="IDR 1.800.390"/>
+        <ItemValue label="Total Price" value="IDR 39.803.000"/>
+     
         
       </View>
-      <View>
+      <View style={styles.content}>
         <Text style={styles.label}>Deliver to:</Text>
-        <ItemValue/>
-        <ItemValue/>
-        <ItemValue/>
-        <ItemValue/>
-        <ItemValue/>
+        <ItemValue label="Name" value="Afif Shato"/>
+        <ItemValue label="Phone No" value="089676645655"/>
+        <ItemValue label="Address" value="Jalan Danau Sentarum"/>
+        <ItemValue label="House No" value="jalur 1 no 5"/>
+        <ItemValue label="City" value="Pontianak"/>
       </View>
       <View>
         <Button text="Checkout Now"/>
