@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     backgroundColor: "white",
-    paddingHorizontal: 24,
     paddingVertical: 8,
     alignItems: "center"
   },

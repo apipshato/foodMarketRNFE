@@ -6,6 +6,7 @@ import HomeProfile from "./HomeProfile"
 import ItemListFood from './ItemListFood'
 import Rating from "./Rating"
 import Counter from './Counter'
+import ItemValue from './ItemValue'
 
 export{
     Header,
@@ -15,5 +16,6 @@ export{
     HomeProfile,
     ItemListFood,
     Rating,
-    Counter
+    Counter,
+    ItemValue
 }
