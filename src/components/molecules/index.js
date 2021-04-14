@@ -7,6 +7,7 @@ import ItemListFood from './ItemListFood'
 import Rating from "./Rating"
 import Counter from './Counter'
 import ItemValue from './ItemValue'
+import EmptyOrder from './EmptyOrder'
 
 export{
     Header,
@@ -17,5 +18,6 @@ export{
     ItemListFood,
     Rating,
     Counter,
-    ItemValue
+    ItemValue,
+    EmptyOrder
 }
