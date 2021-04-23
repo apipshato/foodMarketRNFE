@@ -8,9 +8,11 @@ const ItemListFood = ({
   onPress,
   items,
   rating,
-  totalOrder,
   price,
-  type
+  type,
+  name,
+  date,
+  status
 }) => {
   
   const renderContent = () =>{
@@ -20,8 +22,8 @@ const ItemListFood = ({
         return (
           <>
           <View style={styles.content}>
-          <Text style={styles.title}>Soup Bumil</Text>
-          <Text style={styles.price}>IDR 289.000</Text>
+          <Text style={styles.title}>{name}</Text>
+          <Text style={styles.price}>IDR {price}</Text>
         </View>
        <Rating rating={rating}/>
         
@@ -33,8 +35,8 @@ const ItemListFood = ({
           return(
             <>
               <View style={styles.content}>
-          <Text style={styles.title}>Soup Bumil</Text>
-          <Text style={styles.price}>IDR 289.000</Text>
+          <Text style={styles.title}>{name}</Text>
+          <Text style={styles.price}>IDR {price}</Text>
          
            
         </View>
@@ -47,27 +49,27 @@ const ItemListFood = ({
             return(
               <>
                 <View style={styles.content}>
-          <Text style={styles.title}>Soup Bumil</Text>
+          <Text style={styles.title}>{name}</Text>
           <Text style={styles.price}>
-           {orderItems} items . IDR {totalOrder}
+           {items} items . IDR {price}
            </Text>
            </View>
        
               </>
             )
-            case 'past-order':
+            case 'past-orders':
               // item list in past order
               return(
                 <>
                   <View style={styles.content}>
-            <Text style={styles.title}>Soup Bumil</Text>
+            <Text style={styles.title}>{name}</Text>
             <Text style={styles.price}>
-             {orderItems} items . IDR {totalOrder}
+             {items} items . IDR {price}
              </Text>
              </View>
              <View>
-               <Text>Tanggal</Text>
-               <Text>Status</Text>
+               <Text style={styles.date}>{date}</Text>
+               <Text style={styles.status}>{status}</Text>
              </View>
          
                 </>
@@ -77,8 +79,8 @@ const ItemListFood = ({
                 return (
                   <>
                   <View style={styles.content}>
-                  <Text style={styles.title}>Soup Bumil</Text>
-                  <Text style={styles.price}>IDR 289.000</Text>
+                  <Text style={styles.title}>{name}</Text>
+                  <Text style={styles.price}>IDR {price}</Text>
                 </View>
                <Rating/>
                 
@@ -127,5 +129,15 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontFamily: "Poppins-Regular",
     color: "#8D92A3"
+  },
+  date:{
+    fontSize:10,
+    fontFamily:"Poppins-Regular",
+    color:"#8D92A3"
+  },
+  status:{
+    fontSize:10,
+    fontFamily:"Poppins-Regular",
+    color: "#D9435E"
   }
 });

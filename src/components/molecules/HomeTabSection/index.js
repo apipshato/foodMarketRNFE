@@ -43,21 +43,33 @@ const NewTaste = () => {
   return (
     <View style={{ paddingTop: 8, paddingHorizontal:24 }}>
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={4}
         image={FoodDummy1}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={4}
         image={FoodDummy2}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={4}
         image={FoodDummy3}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={4}
         image={FoodDummy4}
         onPress={() => navigation.navigate("FoodDetail")}
@@ -71,21 +83,33 @@ const Popular = () => {
   return (
     <View style={{ paddingTop: 8 , paddingHorizontal:24}}>
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy4}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy3}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy2}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+      type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy1}
         onPress={() => navigation.navigate("FoodDetail")}
@@ -98,21 +122,33 @@ const Recommended = () => {
   return (
     <View style={{ paddingTop: 8 ,paddingHorizontal:24}}>
       <ItemListFood 
+       type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy3}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+       type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy4}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+       type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy1}
         onPress={() => navigation.navigate("FoodDetail")}
       />
       <ItemListFood 
+       type="product" 
+      name="Sop Bumil" 
+      price="380.000"
       rating={3}
         image={FoodDummy2}
         onPress={() => navigation.navigate("FoodDetail")}

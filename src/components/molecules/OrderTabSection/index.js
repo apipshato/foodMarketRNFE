@@ -53,31 +53,43 @@ const InProgress = () => {
       rating={4}
         image={FoodDummy1}
         onPress={() => navigation.navigate("FoodDetail")}
-        inProgress
-        type="order-summary"
-        orderItems={3}
-        totalOrder="2.000.000"
+        type="in-progress"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
       />
       <ItemListFood 
       rating={4}
         image={FoodDummy2}
         onPress={() => navigation.navigate("FoodDetail")}
+        type="in-progress"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
       />
       <ItemListFood 
       rating={4}
         image={FoodDummy3}
         onPress={() => navigation.navigate("FoodDetail")}
+        type="in-progress"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
       />
       <ItemListFood 
       rating={4}
         image={FoodDummy4}
         onPress={() => navigation.navigate("FoodDetail")}
+        type="in-progress"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
       />
     </View>
   );
 };
 
-const PastOrder = () => {
+const PastOrders = () => {
   const navigation =useNavigation();
   return (
     <View style={{ paddingTop: 8 , paddingHorizontal:24}}>
@@ -85,21 +97,43 @@ const PastOrder = () => {
       rating={3}
         image={FoodDummy4}
         onPress={() => navigation.navigate("FoodDetail")}
+        type="past-orders"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
+        date="Jun 12, 14:00"
+    
       />
       <ItemListFood 
       rating={3}
         image={FoodDummy3}
         onPress={() => navigation.navigate("FoodDetail")}
+        type="past-orders"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
+        date="Jun 12, 14:00"
+        status="Cancel"
       />
       <ItemListFood 
       rating={3}
         image={FoodDummy2}
         onPress={() => navigation.navigate("FoodDetail")}
+        type="past-orders"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
+        date="Jun 12, 14:00"
+        status="Sent"
       />
       <ItemListFood 
       rating={3}
         image={FoodDummy1}
         onPress={() => navigation.navigate("FoodDetail")}
+        type="past-orders"
+        items={3}
+        price="2.000.000"
+        name="Sop Bumil"
       />
     </View>
   );
@@ -118,7 +152,7 @@ const OrderTabSection = () => {
 
   const renderScene = SceneMap({
     1: InProgress,
-    2: PastOrder,
+    2: PastOrders,
 
   });
   return (
