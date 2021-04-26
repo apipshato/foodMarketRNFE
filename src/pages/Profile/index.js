@@ -1,14 +1,75 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { ProfileDummy } from "../../assets";
+import ProfileTabSection from "../../components/molecules/ProfileTabSection";
 
 const Profile = () => {
-    return (
-        <View>
-            <Text>ini page profiless</Text>
+  return (
+    <View style={styles.page}>
+      <View style={styles.profilDetail}>
+        <View style={styles.photo}>
+          <View style={styles.borderPhoto}>
+            <Image source={ProfileDummy} style={styles.photoContainer} />
+          </View>
         </View>
-    )
-}
+        <Text style={styles.name}>Afif Shato</Text>
+        <Text style={styles.email}>afifshatos@gmail.com</Text>
+      </View>
+      <View style={styles.content}>
+        <ProfileTabSection />
+      </View>
+    </View>
+  );
+};
 
-export default Profile
+export default Profile;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  photo: {
+    alignItems: "center",
+    marginTop: 26,
+    marginBottom: 16,
+  
+  },
+  borderPhoto: {
+    borderWidth: 1,
+    borderColor: "#8D92A3",
+    width: 110,
+    height: 110,
+    borderRadius: 110,
+    borderStyle: "dashed",
+    alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center"
+  },
+  photoContainer: {
+    width: 90,
+    height: 90,
+    borderRadius: 90,
+    backgroundColor: "#F0F0F0",
+    padding: 24
+  },
+  page: {
+    flex: 1
+  },
+  content: {
+    flex: 1,
+    marginTop: 24
+  },
+  name: {
+    fontSize: 18,
+    fontFamily: "Poppins-Medium",
+    color: "#020202",
+    textAlign: "center"
+  },
+  email: {
+    fontSize: 13,
+    fontFamily: "Poppins-Light",
+    color: "#8D92A3",
+    textAlign: "center"
+  },
+  profilDetail:{
+      backgroundColor:"white",
+      paddingBottom:26
+  }
+});

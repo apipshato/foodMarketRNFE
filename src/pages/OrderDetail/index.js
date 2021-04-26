@@ -38,7 +38,7 @@ const OrderDetail = () => {
           <ItemValue label="#FM209391" value="Paid" valueColor="#1ABC9C"/>
         </View>
         <View style={styles.button}>
-          <Button text="Checkout Now" onPress={() =>navigation.replace("SuccessOrder")}/>
+          <Button text="Cancel My Order" onPress={() =>navigation.replace("SuccessOrder")} color="#D9435E" textColor="white"/>
         </View>
         <Gap height={40}/>
       </ScrollView>
