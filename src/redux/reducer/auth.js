@@ -7,7 +7,7 @@ const initStateRegister={
     houseNumber:'',
     phoneNumber:''
 }
-const registerReducer = (state, action) =>{
+export const registerReducer = (state=initStateRegister, action) =>{
     if(action.type === 'SET_REGISTER'){
         return {
             ...state,
@@ -21,7 +21,11 @@ const registerReducer = (state, action) =>{
     if(action.type === 'SET_ADDRESS'){
         return{
             ...state,
-            adddress: action.value.address,
+            address: action.value.address,
+            city: action.value.city,
+            houseNumber: action.value.houseNumber,
+            phoneNumber: action.value.phoneNumber
+
         }
     }
     return state
