@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Header, TextInput, Gap, Button } from "../../components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useForm from "../../utils/useForm";
 
 
@@ -11,13 +11,14 @@ const SignUp = ({ navigation }) => {
     email: '',
     password:''
   })
-
+  const dispatch = useDispatch();
   const onSubmit = () =>{
     console.log('form: ', form);
-    //navigation.navigate('SignUpAddress')
+    dispatch({type: 'SET_REGISTER', value: form })
+    navigation.navigate('SignUpAddress')
   }
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 <View style={styles.page}>
       <Header title="Sign Up" subTitle="Register and Eat" onBack={() => {}} />
       <View style={styles.container}>
@@ -49,6 +50,7 @@ const SignUp = ({ navigation }) => {
           placeholder="Type your password"
           value={form.password}
           onChangeText={value => setForm("password", value)}
+          secureTextEntry
         />
         <Gap height={24} />
         <Button
