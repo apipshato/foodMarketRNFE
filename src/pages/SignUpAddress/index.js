@@ -21,7 +21,16 @@ const registerReducer = useSelector((state) => state.registerReducer);
       ...registerReducer,
     }
     console.log('data Register:', data);
-    //navigation.replace('SuccessSignUp')
+    Axios.post('http://foodmarket.buildwithangga.id/api/register', data)
+    .then(res =>{
+      console.log('data success:', res.data);
+      navigation.replace('SuccessSignUp')
+
+    })
+    .catch(err =>{
+
+    })
+
   };
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
