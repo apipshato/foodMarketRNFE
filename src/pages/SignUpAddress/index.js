@@ -2,7 +2,8 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Header, TextInput, Gap, Button, Select } from "../../components";
 import useForm from "../../utils/useForm";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
+import Axios from 'axios'
 
 const SignUpAddress = ({ navigation }) => {
   const [form, setForm] = useForm({
@@ -11,26 +12,24 @@ const SignUpAddress = ({ navigation }) => {
     houseNumber: "",
     city: "Jakarta"
   });
-const dispatch = useDispatch();
-const registerReducer = useSelector((state) => state.registerReducer);
+  const dispatch = useDispatch();
+  const registerReducer = useSelector(state => state.registerReducer);
 
   const onSubmit = () => {
     console.log("form: ", form);
-   const data={
+    const data = {
       ...form,
-      ...registerReducer,
-    }
-    console.log('data Register:', data);
-    Axios.post('http://foodmarket.buildwithangga.id/api/register', data)
-    .then(res =>{
-      console.log('data success:', res.data);
-      navigation.replace('SuccessSignUp')
-
-    })
-    .catch(err =>{
-
-    })
-
+      ...registerReducer
+    };
+    console.log("data Register:", data);
+    Axios.post("http://foodmarket-backend.buildwithangga.id/api/register", data)
+      .then((res) => {
+        console.log("data success: ", res.data);
+        navigation.replace("SuccessSignUp");
+      })
+      .catch((err) => {
+        console.log("sign up error", err);
+      });
   };
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

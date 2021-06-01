@@ -15,7 +15,7 @@ const SignUp = ({ navigation }) => {
   const onSubmit = () =>{
     console.log('form: ', form);
     dispatch({type: 'SET_REGISTER', value: form })
-    //navigation.navigate('SignUpAddress')
+    navigation.navigate('SignUpAddress')
   }
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
