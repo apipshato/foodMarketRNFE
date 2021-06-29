@@ -4,6 +4,7 @@ import { Header, TextInput, Gap, Button, Select } from "../../components";
 import useForm from "../../utils/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios'
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 const SignUpAddress = ({ navigation }) => {
   const [form, setForm] = useForm({
@@ -25,12 +26,21 @@ const SignUpAddress = ({ navigation }) => {
     Axios.post("http://foodmarket-backend.buildwithangga.id/api/register", data)
       .then((res) => {
         console.log("data success: ", res.data);
+        showMessage('Register Succsess', 'success')
         navigation.replace("SuccessSignUp");
       })
       .catch((err) => {
-        console.log("sign up error", err);
+        showMessage(err?.response?.data?.message)
       });
   };
+
+  const showToast= (message,type) => {
+    showMessage({
+      message,
+      type: type === 'success' ? 'success' : 'danger',
+      backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
+  });
+}
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.page}>
