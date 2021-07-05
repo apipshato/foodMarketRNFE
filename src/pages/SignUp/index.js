@@ -4,13 +4,15 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from "react-native";
 import { Header, TextInput, Gap, Button } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
 import useForm from "../../utils/useForm";
 import ImagePicker from "react-native-image-picker";
-import {showMessage}  from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
+import { useState } from "react";
 
 const SignUp = ({ navigation }) => {
   const [form, setForm] = useForm({
@@ -18,6 +20,8 @@ const SignUp = ({ navigation }) => {
     email: "",
     password: ""
   });
+
+  const [photo, setPhoto] = useState("");
   const dispatch = useDispatch();
   const onSubmit = () => {
     console.log("form: ", form);
@@ -33,13 +37,14 @@ const SignUp = ({ navigation }) => {
         showMessage("Anda tidak memilih Photo");
       } else {
         const source = { uri: response.uri };
-
+        const dataImage = {
+          uri: response.uri,
+          type: response.type,
+          name: response.fileName
+        };
+        setPhoto(source)
         // You can also display the image using data:
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        this.setState({
-          avatarSource: source
-        });
       }
     });
   };
@@ -55,9 +60,13 @@ const SignUp = ({ navigation }) => {
             {/* lingkaran yang grey view kedua */}
             <TouchableOpacity onPress={addPhoto}>
               <View style={styles.borderPhoto}>
-                <View style={styles.photoContainer}>
-                  <Text style={styles.addPhoto}>Add Photo</Text>
-                </View>
+                {photo ? (
+                    <Image source={photo}  style={styles.photoContainer}/>
+                 ) : ( 
+                    <View style={styles.photoContainer}>
+                    <Text style={styles.addPhoto}>Add Photo</Text>
+                    </View>
+                 )}
               </View>
             </TouchableOpacity>
           </View>
@@ -106,7 +115,8 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 90,
     backgroundColor: "#F0F0F0",
-    padding: 24
+    justifyContent: 'center',
+    alignItems:'center'
   },
   photo: { alignItems: "center", marginTop: 26, marginBottom: 16 },
   borderPhoto: {
