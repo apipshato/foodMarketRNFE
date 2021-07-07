@@ -30,7 +30,13 @@ const SignUp = ({ navigation }) => {
   };
 
   const addPhoto = () => {
-    ImagePicker.launchImageLibrary({}, response => {
+    ImagePicker.launchImageLibrary({
+      quality: 0.5,
+      maxWidth:200,
+      maxHeight:200
+    }, response => {
+     
+
       console.log("Response=", response);
 
       if (response.didCancel || response.error) {
@@ -43,6 +49,8 @@ const SignUp = ({ navigation }) => {
           name: response.fileName
         };
         setPhoto(source)
+        dispatch({type: 'SET_PHOTO', value: dataImage});
+        dispatch({type: 'SET_UPLOAD_STATUS', value: true})
         // You can also display the image using data:
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
       }
