@@ -27,6 +27,14 @@ dispatch({type:'SET_LOADING', value: true});
     Axios.post("http://foodmarket-backend.buildwithangga.id/api/register", data)
       .then((res) => {
         console.log("data success: ", res.data);
+        Axios.post('http://foodmarket-backend.buildwithangga.id/api/register',
+        dataPhoto,
+        {
+          headers:{
+            'Authorization': `${res.data.data.token_type} ${res.data.data.access_token}`,
+            'Content-Type' : 'multipart/form-data'
+          }
+        })
         dispatch({type:'SET_LOADING', value: false});
         showMessage('Register Succsess')
         navigation.replace("SuccessSignUp");
