@@ -7,7 +7,7 @@ const API_HOST= {
     url:'http://foodmarket-backend.buildwithangga.id/api'
 }
 
-const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch) =>{
+export const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch) =>{
     Axios.post(`${API_HOST.url}/register`, dataRegister)
     .then((res) => {
       console.log("data success: ", res.data);
