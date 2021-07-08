@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+//import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { FoodDummy1 } from "../../assets";

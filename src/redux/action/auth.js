@@ -4,7 +4,7 @@ import { setLoading } from './global';
 
 
 const API_HOST= {
-    url:'http://foodmarket-backend.buildwithangga.id/api'
+    url:'http://foodmarket-backend.buildwithangga.id/api',
 }
 
 export const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch) =>{
@@ -12,11 +12,12 @@ export const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch
    
 
     .then((res) => {
+      const token = `${res.data.data.token_type} ${res.data.data.access_token}`
+      const profile = res.data.data.user
       console.log("data success: ", res.data);
        //data user
-    storeData('userProfile', res.data.data.user)
+    storeData('userProfile', profile)
     //data token
-    const token = `${res.data.data.token_type} ${res.data.data.access_token}`
     storeData('token',{value : token})
       if(photoReducer.isUploadPhoto ){
         const photoForUpload= new FormData();
@@ -29,10 +30,6 @@ export const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch
             Authorization: token,
             'Content-Type' : 'multipart/form-data'
           },
-        },
-        )
-        .then(resUpload =>{
-          console.log('success Upload', resUpload);
         })
         .catch(err=>{
           showMessage('upload Photo Tidak berhasil')
@@ -40,7 +37,6 @@ export const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch
       }
     
       dispatch(setLoading(false));
-      showMessage('Register Succsess','success')
       navigation.replace("SuccessSignUp");
     })
     .catch((err) => {
