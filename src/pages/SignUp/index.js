@@ -30,31 +30,32 @@ const SignUp = ({ navigation }) => {
   };
 
   const addPhoto = () => {
-    ImagePicker.launchImageLibrary({
-      quality: 0.5,
-      maxWidth:200,
-      maxHeight:200
-    }, response => {
-     
+    ImagePicker.launchImageLibrary(
+      {
+        quality: 0.5,
+        maxWidth: 200,
+        maxHeight: 200
+      },
+      response => {
+        console.log("Response=", response);
 
-      console.log("Response=", response);
-
-      if (response.didCancel || response.error) {
-        showMessage("Anda tidak memilih Photo");
-      } else {
-        const source = { uri: response.uri };
-        const dataImage = {
-          uri: response.uri,
-          type: response.type,
-          name: response.fileName
-        };
-        setPhoto(source)
-        dispatch({type: 'SET_PHOTO', value: dataImage});
-        dispatch({type: 'SET_UPLOAD_STATUS', value: true})
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        if (response.didCancel || response.error) {
+          showMessage("Anda tidak memilih Photo");
+        } else {
+          const source = { uri: response.uri };
+          const dataImage = {
+            uri: response.uri,
+            type: response.type,
+            name: response.fileName
+          };
+          setPhoto(source);
+          dispatch({ type: "SET_PHOTO", value: dataImage });
+          dispatch({ type: "SET_UPLOAD_STATUS", value: true });
+          // You can also display the image using data:
+          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        }
       }
-    });
+    );
   };
 
   return (
@@ -68,13 +69,11 @@ const SignUp = ({ navigation }) => {
             {/* lingkaran yang grey view kedua */}
             <TouchableOpacity onPress={addPhoto}>
               <View style={styles.borderPhoto}>
-                {photo ? (
-                    <Image source={photo}  style={styles.photoContainer}/>
-                 ) : ( 
-                    <View style={styles.photoContainer}>
-                    <Text style={styles.addPhoto}>Add Photo</Text>
-                    </View>
-                 )}
+                {photo
+                  ? <Image source={photo} style={styles.photoContainer} />
+                  : <View style={styles.photoContainer}>
+                      <Text style={styles.addPhoto}>Add Photo</Text>
+                    </View>}
               </View>
             </TouchableOpacity>
           </View>
@@ -123,8 +122,8 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 90,
     backgroundColor: "#F0F0F0",
-    justifyContent: 'center',
-    alignItems:'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   photo: { alignItems: "center", marginTop: 26, marginBottom: 16 },
   borderPhoto: {

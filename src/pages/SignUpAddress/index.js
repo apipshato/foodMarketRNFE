@@ -1,7 +1,7 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Header, TextInput, Gap, Button, Select } from "../../components";
-import {useForm,showMessage }from "../../utils/useForm";
+import {useForm, showMessage }from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios'
 
@@ -20,47 +20,45 @@ const SignUpAddress = ({ navigation }) => {
     console.log("form: ", form);
     const data = {
       ...form,
-      ...registerReducer
+      ...registerReducer,
     };
   
 dispatch({type:'SET_LOADING', value: true});
     Axios.post("http://foodmarket-backend.buildwithangga.id/api/register", data)
       .then((res) => {
         console.log("data success: ", res.data);
-        const photoForUpload= new formdata();
-        photoForUpload.append('file', photoReducer);
-
-        Axios.post('http://foodmarket-backend.buildwithangga.id/api/register',
-        dataPhoto,
-        {
-          headers:{
-            'Authorization': `${res.data.data.token_type} ${res.data.data.access_token}`,
-            'Content-Type' : 'multipart/form-data'
-          }
-        })
-        .then(resUpload=>{
-          console.log('success Upload', resUpload);
-        })
-        .catch(err=>{
-          showMessage('upload Photo Tidak berhasil')
-        })
+        if(photoReducer.isUploadPhoto ){
+          const photoForUpload= new FormData();
+          photoForUpload.append('file', photoReducer);
+  
+          Axios.post("http://foodmarket-backend.buildwithangga.id/api/register",
+          photoForUpload,
+          {
+            headers:{
+              Authorization: `${res.data.data.token_type} ${res.data.data.access_token}`,
+              'Content-Type' : 'multipart/form-data'
+            },
+          },
+          )
+          .then(resUpload =>{
+            console.log('success Upload', resUpload);
+          })
+          .catch(err=>{
+            showMessage('upload Photo Tidak berhasil')
+          })
+        }
+      
         dispatch({type:'SET_LOADING', value: false});
-        showMessage('Register Succsess')
+        showMessage('Register Succsess','success')
         navigation.replace("SuccessSignUp");
       })
       .catch((err) => {
-        showMessage(err?.response?.data?.message)
         dispatch({type:'SET_LOADING', value: false});
+        showMessage(err?.response?.data?.message)  
       });
    };
 
-  const showToast= (message,type) => {
-    showMessage({
-      message,
-      type: type === 'success' ? 'success' : 'danger',
-      backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
-  });
-}
+  
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.page}>
