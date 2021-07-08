@@ -48,12 +48,16 @@ const renderTabBar = props =>
 
 const Account = () => {
   const navigation =useNavigation();
+  const signOut= () => {
+    
+  }
   return (
     <View style={{ paddingTop: 8, paddingHorizontal:24 }}>
       <ItemListMenu text="Edit Profile"/>
       <ItemListMenu text="Home Address"/>
       <ItemListMenu text="Security"/>
       <ItemListMenu text="Payments"/>
+      <ItemListMenu text="SignOut" onPress={}/>
     </View>
   );
 };

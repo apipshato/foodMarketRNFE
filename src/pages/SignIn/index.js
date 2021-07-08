@@ -1,7 +1,9 @@
-import Axios from "axios";
+
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useDispatch } from "react-redux";
 import { Button, Gap, Header, TextInput } from "../../components";
+import { setLoading, signUpAction } from "../../redux/action";
 import { useForm } from "../../utils";
 
 const SignIn = ({ navigation }) => {
@@ -12,9 +14,9 @@ const SignIn = ({ navigation }) => {
     password: ''
   })
 
-
+const dispatch =useDispatch();
   const onSubmit= ()=>{
-   
+   dispatch(signUpAction(form , navigation))
   }
   return (
     <View style={styles.page}>
