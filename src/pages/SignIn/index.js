@@ -14,14 +14,7 @@ const SignIn = ({ navigation }) => {
 
 
   const onSubmit= ()=>{
-    console.log('form: ' , form );
-   Axios.post('http://foodmarket-backend.buildwithangga.id/api/login', form)
-   .then(res=>{
-    console.log('success', res);
-   })
-   .catch(err =>{
-    console.log('error', err);
-   })
+   
   }
   return (
     <View style={styles.page}>
