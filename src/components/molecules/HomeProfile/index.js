@@ -6,12 +6,12 @@ import { getData } from '../../../utils'
 
 const HomeProfile = () => {
   const [photo, setPhoto] =useState(ProfileDummy);
-  useEffect(() => {},[
-  getData('userProfile').then((res) => {
+  useEffect(() => {
+    getData('userProfile').then((res) => {
     console.log('user profile', res);
     setPhoto({uri: res.profile_photo_url})
-  }),
-  ]);
+  })
+  },[]);
     return (
         <View style={styles.profileContainer}>
         <View>
