@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, AsyncStorage } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import {
   FoodDummy1,
@@ -49,7 +49,9 @@ const renderTabBar = props =>
 const Account = () => {
   const navigation =useNavigation();
   const signOut= () => {
-    
+    AsycnStorage.multiRemove(['userProfile', 'token']).then(()=> {
+      navigation.reset({index:0, routes: [{name : 'signIn'}]})
+    })
   }
   return (
     <View style={{ paddingTop: 8, paddingHorizontal:24 }}>
@@ -57,7 +59,7 @@ const Account = () => {
       <ItemListMenu text="Home Address"/>
       <ItemListMenu text="Security"/>
       <ItemListMenu text="Payments"/>
-      <ItemListMenu text="SignOut" onPress={}/>
+      <ItemListMenu text="SignOut" onPress={signOut}/>
     </View>
   );
 };

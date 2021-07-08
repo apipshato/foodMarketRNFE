@@ -1,23 +1,33 @@
-
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { Button, Gap, Header, TextInput } from "../../components";
 import { setLoading, signUpAction } from "../../redux/action";
-import { useForm } from "../../utils";
+import { getData, useForm } from "../../utils";
 
 const SignIn = ({ navigation }) => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
-  const [form, setForm]= useForm({
-    email: '',
-    password: ''
-  })
+  const [form, setForm] = useForm({
+    email: "",
+    password: ""
+  });
 
-const dispatch =useDispatch();
-  const onSubmit= ()=>{
-   dispatch(signUpAction(form , navigation))
-  }
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getData("token").then(res => {
+      console.log("token", res);
+
+      if(res){
+        navigation.reset({index: 0, routes :[{name: 'MainApp'}]})
+      }
+    });
+  }, []);
+  const onSubmit = () => {
+    dispatch(signUpAction(form, navigation));
+  };
   return (
     <View style={styles.page}>
       <Header title="Sign In" subTitle="Find your the best meal" />
@@ -26,14 +36,14 @@ const dispatch =useDispatch();
           label="Email Address"
           placeholder="Type your email address"
           value={form.email}
-          onChangeText={(value)=>setForm('email',value)}
+          onChangeText={value => setForm("email", value)}
         />
         <Gap height={16} />
         <TextInput
           label="Password"
           placeholder="Type your password"
           value={form.password}
-          onChangeText={value => setForm('password',value)}
+          onChangeText={value => setForm("password", value)}
           secureTextEntry
         />
         <Gap height={24} />
@@ -43,7 +53,7 @@ const dispatch =useDispatch();
           text="Create New Account"
           color="#8D92A3"
           textColor="white"
-          onPress={()=>navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate("SignUp")}
         />
       </View>
     </View>
