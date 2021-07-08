@@ -16,15 +16,7 @@ const SignIn = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    getData("token").then(res => {
-      console.log("token", res);
-
-      if(res){
-        navigation.reset({index: 0, routes :[{name: 'MainApp'}]})
-      }
-    });
-  }, []);
+ 
   const onSubmit = () => {
     dispatch(signUpAction(form, navigation));
   };

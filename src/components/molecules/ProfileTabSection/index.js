@@ -49,10 +49,10 @@ const renderTabBar = props =>
 const Account = () => {
   const navigation =useNavigation();
   const signOut= () => {
-    AsycnStorage.multiRemove(['userProfile', 'token']).then(()=> {
-      navigation.reset({index:0, routes: [{name : 'signIn'}]})
-    })
-  }
+    AsyncStorage.multiRemove(['userProfile', 'token']).then(() => {
+      navigation.reset({index: 0, routes: [{name: 'SignIn'}]});
+    });
+  };
   return (
     <View style={{ paddingTop: 8, paddingHorizontal:24 }}>
       <ItemListMenu text="Edit Profile"/>
