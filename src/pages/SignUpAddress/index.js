@@ -4,6 +4,7 @@ import { Header, TextInput, Gap, Button, Select } from "../../components";
 import {useForm, showMessage }from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios'
+import { setLoading } from "../../redux/action/global";
 
 
 const SignUpAddress = ({ navigation }) => {
@@ -23,39 +24,8 @@ const SignUpAddress = ({ navigation }) => {
       ...registerReducer,
     };
   
-dispatch({type:'SET_LOADING', value: true});
-    Axios.post("http://foodmarket-backend.buildwithangga.id/api/register", data)
-      .then((res) => {
-        console.log("data success: ", res.data);
-        if(photoReducer.isUploadPhoto ){
-          const photoForUpload= new FormData();
-          photoForUpload.append('file', photoReducer);
+dispatch(setLoading(true));
   
-          Axios.post("http://foodmarket-backend.buildwithangga.id/api/register",
-          photoForUpload,
-          {
-            headers:{
-              Authorization: `${res.data.data.token_type} ${res.data.data.access_token}`,
-              'Content-Type' : 'multipart/form-data'
-            },
-          },
-          )
-          .then(resUpload =>{
-            console.log('success Upload', resUpload);
-          })
-          .catch(err=>{
-            showMessage('upload Photo Tidak berhasil')
-          })
-        }
-      
-        dispatch({type:'SET_LOADING', value: false});
-        showMessage('Register Succsess','success')
-        navigation.replace("SuccessSignUp");
-      })
-      .catch((err) => {
-        dispatch({type:'SET_LOADING', value: false});
-        showMessage(err?.response?.data?.message)  
-      });
    };
 
   
