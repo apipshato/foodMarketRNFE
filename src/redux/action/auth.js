@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { showMessage } from '../../utils';
+import { showMessage, storeData } from '../../utils';
 import { setLoading } from './global';
 
 
@@ -9,8 +9,15 @@ const API_HOST= {
 
 export const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch) =>{
     Axios.post(`${API_HOST.url}/register`, dataRegister)
+   
+
     .then((res) => {
       console.log("data success: ", res.data);
+       //data user
+    storeData('userProfile', res.data.data.user)
+    //data token
+    const token = `${res.data.data.token_type} ${res.data.data.access_token}`
+    storeData('token',{value : token})
       if(photoReducer.isUploadPhoto ){
         const photoForUpload= new FormData();
         photoForUpload.append('file', photoReducer);
@@ -19,7 +26,7 @@ export const signUpAction = (dataRegister, photoReducer, navigation) =>(dispatch
         photoForUpload,
         {
           headers:{
-            Authorization: `${res.data.data.token_type} ${res.data.data.access_token}`,
+            Authorization: token,
             'Content-Type' : 'multipart/form-data'
           },
         },
