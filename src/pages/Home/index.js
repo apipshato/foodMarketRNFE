@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 
 import { FoodDummy4, FoodDummy1, FoodDummy2, FoodDummy3 } from "../../assets";
@@ -6,7 +7,9 @@ import { FoodDummy4, FoodDummy1, FoodDummy2, FoodDummy3 } from "../../assets";
 import { FoodCard, Gap, HomeProfile, HomeTabSection } from "../../components";
 
 const Home = () => {
- 
+ useEffect(()=>{
+   
+ })
   return (
     <ScrollView>
      <View style={styles.page}>
