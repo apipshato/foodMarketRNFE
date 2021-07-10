@@ -12,3 +12,13 @@ export const getFoodData = () => (dispatch) =>{
     })
 
 }
+export const getFoodDataByTypes = (types) => (dispatch) =>{
+    Axios.get(`${API_HOST.url}/food?types=${types}`)
+    .then(res => {
+        // console.log('res food: ', res.data.data.data);
+        dispatch({type: 'SET_FOOD', value:res.data.data.data })
+    })
+    .catch(err => {
+        console.log('err: ', err);
+    })
+}

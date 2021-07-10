@@ -28,6 +28,6 @@ const Rating = ({ number }) => {
 export default Rating;
 
 const styles = StyleSheet.create({
-  ratingContainer: { flexDirection: "row" },
-  starContainer: { flexDirection: "row" }
+  ratingContainer: { flexDirection: "row" , alignItems: 'center'},
+  starContainer: { flexDirection: "row", marginRight: 4 }
 });
