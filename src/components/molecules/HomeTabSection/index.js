@@ -8,7 +8,11 @@ import {
   FoodDummy4
 } from "../../../assets";
 import ItemListFood from "../ItemListFood";
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { homeReducer } from "../../../redux/reducer/home";
+import { useEffect } from "react";
+import { getFoodDataByTypes } from "../../../redux/action";
 
 const renderTabBar = props =>
   <TabBar
@@ -39,78 +43,65 @@ const renderTabBar = props =>
   />;
 
 const NewTaste = () => {
-  const navigation =useNavigation();
+  const { newTaste } = useSelector(state => state.homeReducer);
+  const dispatch =useDispatch();
+  useEffect(()=>{
+    dispatch(getFoodDataByTypes('new_food'))
+
+  }, [])
+  const navigation = useNavigation();
   return (
-    <View style={{ paddingTop: 8, paddingHorizontal:24 }}>
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={4}
-        image={FoodDummy1}
-        onPress={() => navigation.navigate("FoodDetail")}
-      />
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={4}
-        image={FoodDummy2}
-        onPress={() => navigation.navigate("FoodDetail")}
-      />
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={4}
-        image={FoodDummy3}
-        onPress={() => navigation.navigate("FoodDetail")}
-      />
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={4}
-        image={FoodDummy4}
-        onPress={() => navigation.navigate("FoodDetail")}
-      />
+    <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
+      {newTaste.map(item => {
+        return (
+          <ItemListFood
+            key={item.id}
+            type="product"
+            name={item.name}
+            price={item.price}
+            rating={item.rate}
+            image={{uri: item.picturePath }}
+            onPress={() => navigation.navigate("FoodDetail")}
+          />
+        );
+      })}
     </View>
   );
 };
 
 const Popular = () => {
-  const navigation =useNavigation();
+  const navigation = useNavigation();
   return (
-    <View style={{ paddingTop: 8 , paddingHorizontal:24}}>
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+    <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy4}
         onPress={() => navigation.navigate("FoodDetail")}
       />
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy3}
         onPress={() => navigation.navigate("FoodDetail")}
       />
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy2}
         onPress={() => navigation.navigate("FoodDetail")}
       />
-      <ItemListFood 
-      type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy1}
         onPress={() => navigation.navigate("FoodDetail")}
       />
@@ -118,38 +109,38 @@ const Popular = () => {
   );
 };
 const Recommended = () => {
-  const navigation =useNavigation();
+  const navigation = useNavigation();
   return (
-    <View style={{ paddingTop: 8 ,paddingHorizontal:24}}>
-      <ItemListFood 
-       type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+    <View style={{ paddingTop: 8, paddingHorizontal: 24 }}>
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy3}
         onPress={() => navigation.navigate("FoodDetail")}
       />
-      <ItemListFood 
-       type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy4}
         onPress={() => navigation.navigate("FoodDetail")}
       />
-      <ItemListFood 
-       type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy1}
         onPress={() => navigation.navigate("FoodDetail")}
       />
-      <ItemListFood 
-       type="product" 
-      name="Sop Bumil" 
-      price="380.000"
-      rating={3}
+      <ItemListFood
+        type="product"
+        name="Sop Bumil"
+        price="380.000"
+        rating={3}
         image={FoodDummy2}
         onPress={() => navigation.navigate("FoodDetail")}
       />

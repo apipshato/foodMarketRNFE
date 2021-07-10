@@ -25,7 +25,7 @@ const ItemListFood = ({
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.price}>IDR {price}</Text>
         </View>
-       <Rating rating={rating}/>
+       <Rating number={rating}/>
         
         </>
         )
