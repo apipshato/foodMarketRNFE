@@ -1,16 +1,16 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { startDetecting } from "react-native/Libraries/Utilities/PixelRatio";
-import { IcStarOff, IcStarOn } from "../../../assets";
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {IcStarOff, IcStarOn} from '../../../assets';
+import Number from '../Number';
 
-const Rating = ({ number }) => {
+const Rating = ({number}) => {
   const renderStar = () => {
     let star = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= number) {
-        star.push(<IcStarOn />);
+        star.push(<IcStarOn key={i} />);
       } else {
-        star.push(<IcStarOff />);
+        star.push(<IcStarOff key={i} />);
       }
     }
     return star;
@@ -18,9 +18,7 @@ const Rating = ({ number }) => {
   return (
     <View style={styles.ratingContainer}>
       <View style={styles.starContainer}>{renderStar()}</View>
-      <Text>
-        {number}
-      </Text>
+      <Number number={number} type="decimal" style={styles.numberRating} />
     </View>
   );
 };
@@ -28,6 +26,7 @@ const Rating = ({ number }) => {
 export default Rating;
 
 const styles = StyleSheet.create({
-  ratingContainer: { flexDirection: "row" , alignItems: 'center'},
-  starContainer: { flexDirection: "row", marginRight: 4 }
+  ratingContainer: {flexDirection: 'row'},
+  starContainer: {flexDirection: 'row', marginRight: 4},
+  numberRating: {fontSize: 12, fontFamily: 'Poppins-Regular', color: '#8D92A3'},
 });

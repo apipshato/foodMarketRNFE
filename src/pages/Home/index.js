@@ -25,7 +25,7 @@ const Home = () => {
               {food.map(itemFood => {
                 return (
                   <FoodCard
-                  key={itemFood.id}
+                   key={itemFood.id}
                     name={itemFood.name}
                     image={{ uri: itemFood.picturePath }}
                     rating={itemFood.rate}
