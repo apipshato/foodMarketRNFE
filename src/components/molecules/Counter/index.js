@@ -1,14 +1,16 @@
 import React from "react";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { IcButtonMin, IcButtonPlus } from "../../../assets";
 
 const Counter = () => {
+  const[value, setValue]=useState(1);
   return (
     <View style={styles.container}>
       <TouchableOpacity>
         <IcButtonMin />
       </TouchableOpacity>
-      <Text style={styles.value}>14</Text>
+      <Text style={styles.value}>{value}</Text>
       <TouchableOpacity>
         <IcButtonPlus />
       </TouchableOpacity>

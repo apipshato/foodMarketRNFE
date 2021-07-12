@@ -5,7 +5,7 @@ import Rating from "../Rating";
 
 const FoodCard = ({ image, name, rating, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
 
     <View style={styles.container}>
       <Image source={image} style={styles.image} />

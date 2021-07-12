@@ -10,11 +10,20 @@ import {
 import { FoodDummy6, IcBackWhite } from "../../assets";
 import { Button, Counter, Rating } from "../../components";
 
-const FoodDetail = ({navigation}) => {
+const FoodDetail = ({navigation,route }) => {
+  const {
+    id,
+    name,
+    picturePath,
+    description,
+    ingredients,
+    rate,
+    price,
+  } = route.params;
   return (
     <View style={styles.page}>
-      <ImageBackground source={FoodDummy6} style={styles.cover}>
-        <TouchableOpacity style={styles.back}>
+      <ImageBackground source={{uri: picturePath}} style={styles.cover}>
+        <TouchableOpacity style={styles.back} onPress={()=>navigation.goBack()}>
           <IcBackWhite />
         </TouchableOpacity>
       </ImageBackground>
@@ -22,19 +31,17 @@ const FoodDetail = ({navigation}) => {
         <View style={styles.mainContent}>
           <View style={styles.productContainer}>
             <View>
-              <Text style={styles.title}>Cherry Healty</Text>
-              <Rating />
+              <Text style={styles.title}>{name}</Text>
+              <Rating number={rate} />
             </View>
             <Counter />
           </View>
-          <Text style={styles.description}>
-            Makanan khas Bandung yang cukup sering dipesan oleh anak muda dengan
-            pola makan yang cukup tinggi dengan mengutamakan diet yang sehat dan
-            teratur.
+          <Text style={styles.desc}>
+           {description}
           </Text>
           <Text style={styles.label}>Ingridients :</Text>
           <Text style={styles.description}>
-            Seledri, telur, blueberry, madu.
+            {ingredients}.
           </Text>
         </View>
 
@@ -80,7 +87,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flex: 1
   },
-  description: {
+  desc: {
     fontSize: 14,
     fontFamily: "Poppins-Regular",
     color: "#8D92A3",
