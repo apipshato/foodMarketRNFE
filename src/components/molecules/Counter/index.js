@@ -3,29 +3,46 @@ import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { IcButtonMin, IcButtonPlus } from "../../../assets";
 
-const Counter = () => {
-  const[value, setValue]=useState(1);
+const Counter = ({onValueChange}) => {
+  const [value, setValue] = useState(1);
+
+  useEffect(() => {
+    onValueChange(value);
+  }, []);
+
+  const onCount = (type) => {
+    let result = value;
+    if (type === 'plus') {
+      result = value + 1;
+    }
+    if (type === 'minus') {
+      if (value > 1) {
+        result = value - 1;
+      }
+    }
+    setValue(result);
+    onValueChange(result);
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => onCount('minus')}>
         <IcButtonMin />
       </TouchableOpacity>
       <Text style={styles.value}>{value}</Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => onCount('plus')}>
         <IcButtonPlus />
       </TouchableOpacity>
     </View>
   );
 };
-
 export default Counter;
 
 const styles = StyleSheet.create({
-  container: { flexDirection: "row", alignItems: "center" },
+  container: {flexDirection: 'row', alignItems: 'center'},
   value: {
     fontSize: 16,
-    fontFamily: "Poppins-Regular",
-    color: "#020202",
-    marginHorizontal: 10
-  }
+    fontFamily: 'Poppins-Regular',
+    color: '#020202',
+    marginHorizontal: 10,
+  },
 });
