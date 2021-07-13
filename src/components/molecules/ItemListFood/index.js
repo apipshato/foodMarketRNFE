@@ -1,95 +1,99 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import Number from "../Number";
+import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Number from '../Number';
+import Rating from '../Rating';
 
-import Rating from "../Rating";
+/*
+TYPE:
+1. product
+2. order-summary
+3. in-progress
+4. past-orders
+*/
 
 const ItemListFood = ({
   image,
   onPress,
-  items,
   rating,
+  items,
   price,
   type,
   name,
   date,
-  status
+  status,
 }) => {
-  
-  const renderContent = () =>{
-    switch(type){
+  const renderContent = () => {
+    switch (type) {
       case 'product':
-        //maka akan muncul seperti di home page
+        // item list product seperti di home page
         return (
           <>
-          <View style={styles.content}>
-          <Text style={styles.title}>{name}</Text>
-          <Number number={price} />
-          {/* <Text style={styles.price}>IDR {price}</Text> */}
-        </View>
-       <Rating number={rating}/>
-        
-        </>
-        )
+            <View style={styles.content}>
+              <Text style={styles.title}>{name}</Text>
+              <Number number={price} style={styles.price} />
+            </View>
+            <Rating number={rating} />
+          </>
+        );
+      case 'order-summary':
+        // item order summary
+        return (
+          <>
+            <View style={styles.content}>
+              <Text style={styles.title}>{name}</Text>
+              <Number number={price} style={styles.price} />
+              {/* <Text style={styles.price}>IDR {price}</Text> */}
+            </View>
+            <Text style={styles.items}>{items} items</Text>
+          </>
+        );
+      case 'in-progress':
+        // item in progress
+        return (
+          <>
+            <View style={styles.content}>
+              <Text style={styles.title}>{name}</Text>
+              <View style={styles.row}>
+                <Text style={styles.price}>{items} items</Text>
+                <View style={styles.dot} />
+                <Number number={price} style={styles.price} />
+              </View>
+            </View>
+          </>
+        );
+      case 'past-orders':
+        // item past orders
+        const formatedDate = new Date(date).toDateString();
+        return (
+          <>
+            <View style={styles.content}>
+              <Text style={styles.title}>{name}</Text>
+              <View style={styles.row}>
+                <Text style={styles.price}>{items} items</Text>
+                <View style={styles.dot} />
+                <Number number={price} style={styles.price} />
+              </View>
+            </View>
+            <View>
+              <Text style={styles.date}>{formatedDate}</Text>
+              <Text style={styles.status(status)}>{status}</Text>
+            </View>
+          </>
+        );
+      default:
+        // item product
+        return (
+          <>
+            <View style={styles.content}>
+              <Text style={styles.title}>{name}</Text>
+              <Number number={price} style={styles.price} />
+            </View>
+            <Rating />
+          </>
+        );
+    }
+  };
 
-        case 'order-summary':
-          //item list order summary
-          return(
-            <>
-              <View style={styles.content}>
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.price}>IDR {price}</Text>
-         
-           
-        </View>
-        <Text style={styles.items}>{items} items</Text>
-    
-            </>
-          )
-          case 'in-progress':
-            //item list di in proggress
-            return(
-              <>
-                <View style={styles.content}>
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.price}>
-           {items} items . IDR {price}
-           </Text>
-           </View>
-       
-              </>
-            )
-            case 'past-orders':
-              // item list in past order
-              return(
-                <>
-                  <View style={styles.content}>
-            <Text style={styles.title}>{name}</Text>
-            <Text style={styles.price}>
-             {items} items . IDR {price}
-             </Text>
-             </View>
-             <View>
-               <Text style={styles.date}>{date}</Text>
-               <Text style={styles.status}>{status}</Text>
-             </View>
-         
-                </>
-              )
-              default:
-                //item product
-                return (
-                  <>
-                  <View style={styles.content}>
-                  <Text style={styles.title}>{name}</Text>
-                  <Text style={styles.price}>IDR {price}</Text>
-                </View>
-               <Rating/>
-                
-                </>
-                )
-                }
-  }
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={styles.container}>
@@ -104,42 +108,42 @@ export default ItemListFood;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    backgroundColor: "white",
+    flexDirection: 'row',
+    backgroundColor: 'white',
     paddingVertical: 8,
-    alignItems: "center"
+    alignItems: 'center',
   },
   image: {
     width: 60,
     height: 60,
     borderRadius: 8,
-    overflow: "hidden",
-    marginRight: 12
+    overflow: 'hidden',
+    marginRight: 12,
   },
-  content: { flex: 1 },
+  content: {flex: 1},
   title: {
+    fontFamily: 'Poppins-Regular',
     fontSize: 16,
-    fontFamily: "Poppins-Regular",
-    color: "#020202"
+    color: '#020202',
   },
   price: {
+    fontFamily: 'Poppins-Regular',
     fontSize: 13,
-    fontFamily: "Poppins-Regular",
-    color: "#8D92A3"
+    color: '#8D92A3',
   },
-  items: {
-    fontSize: 13,
-    fontFamily: "Poppins-Regular",
-    color: "#8D92A3"
+  items: {fontSize: 13, fontFamily: 'Poppins-Regular', color: '#8D92A3'},
+  date: {fontSize: 10, fontFamily: 'Poppins-Regular', color: '#8D92A3'},
+  status: (status) => ({
+    fontSize: 10,
+    fontFamily: 'Poppins-Regular',
+    color: status === 'CANCELLED' ? '#D9435E' : '#1ABC9C',
+  }),
+  row: {flexDirection: 'row', alignItems: 'center'},
+  dot: {
+    width: 3,
+    height: 3,
+    borderRadius: 3,
+    backgroundColor: '#8D92A3',
+    marginHorizontal: 4,
   },
-  date:{
-    fontSize:10,
-    fontFamily:"Poppins-Regular",
-    color:"#8D92A3"
-  },
-  status:{
-    fontSize:10,
-    fontFamily:"Poppins-Regular",
-    color: "#D9435E"
-  }
 });
