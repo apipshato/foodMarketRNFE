@@ -5,16 +5,23 @@ import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, Gap, Header, ItemListFood, ItemValue } from "../../components";
 import { getData } from "../../utils";
+import { WebView } from 'react-native-webview';
+
 
 const OrderSummary = ({ navigation, route }) => {
   const[token , setToken]=useState('')
   const { item, transaction, userProfile } = route.params;
+  const[isPaymentOpen,setIsPaymentOpen]=useState(false)
+  const[paymentURL, setPaymentURL]=useState('http://google.com')
+
   useEffect(()=>{
 getData('token').then(res =>{
   console.log('token : ', res);
   setToken(res.value)
 })
   },[])
+
+
 
   const onCheckOut= ()=>{
     const data ={
@@ -35,6 +42,12 @@ getData('token').then(res =>{
   }).catch(err =>{
     console.log('error checkout ', err);
   })
+  return(
+    <WebView
+    source={{ uri: 'https://google.com' }}
+    
+  />
+  )
   return (
     <ScrollView>
       <Header
