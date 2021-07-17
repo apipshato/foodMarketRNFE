@@ -5,6 +5,16 @@ import { Button, Gap, Header, ItemListFood, ItemValue } from "../../components";
 
 const OrderSummary = ({ navigation, route }) => {
   const { item, transaction, userProfile } = route.params;
+
+  const onCheckOut= ()=>{
+    const data ={
+    food_id:item.id,
+    user_id: userProfile.id,
+    quantity: transaction.totalItem,
+    total: transaction.total
+
+    //navigation.navigate('SuccessOrder')
+  }}
   return (
     <ScrollView>
       <Header
@@ -47,7 +57,7 @@ const OrderSummary = ({ navigation, route }) => {
       <View style={styles.button}>
         <Button
           text="Checkout Now"
-          onPress={() => navigation.replace("SuccessOrder")}
+          onPress={onCheckOut}
         />
       </View>
       <Gap height={40} />
