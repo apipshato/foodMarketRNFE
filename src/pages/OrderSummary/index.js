@@ -1,20 +1,40 @@
 //import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, Gap, Header, ItemListFood, ItemValue } from "../../components";
+import { getData } from "../../utils";
 
 const OrderSummary = ({ navigation, route }) => {
+  const[token , setToken]=useState('')
   const { item, transaction, userProfile } = route.params;
+  useEffect(()=>{
+getData('token').then(res =>{
+  console.log('token : ', res);
+  setToken(res.value)
+})
+  },[])
 
   const onCheckOut= ()=>{
     const data ={
     food_id:item.id,
     user_id: userProfile.id,
     quantity: transaction.totalItem,
-    total: transaction.total
+    total: transaction.total,
+    status: 'PENDING'
 
     //navigation.navigate('SuccessOrder')
   }}
+  Axios.post(`${API_HOST.url}/checkout`,data,{
+    header:{
+      'Authorization': token
+    }
+  }).then(res => {
+    console.log('checkout success ', res.data);
+  }).catch(err =>{
+    console.log('error checkout ', err);
+  })
   return (
     <ScrollView>
       <Header
