@@ -1,172 +1,160 @@
-import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import {
-  FoodDummy1,
-  FoodDummy2,
-  FoodDummy3,
-  FoodDummy4
-} from "../../../assets";
-import ItemListFood from "../ItemListFood";
 import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {
+  Dimensions,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {useDispatch, useSelector} from 'react-redux';
+import {getInProgress, getPastOrders} from '../../../redux/action';
+import ItemListFood from '../ItemListFood';
 
-/*
-1. type product
-2. Order-summary
-3. in-progress
-4. past-orders
-*/
-
-const renderTabBar = props =>
+const renderTabBar = (props) => (
   <TabBar
     {...props}
-    indicatorStyle={{
-      backgroundColor: "#020202",
-      height: 3,
-      width: "15%",
-      marginLeft: "3%"
-    }}
-    style={{
-      backgroundColor: "white",
-      elevation: 0,
-      shadowOpacity: 0,
-      borderBottomColor: "#F2F2F2",
-      borderBottomWidth: 1
-    }}
-    tabStyle={{ width: "auto" }}
-    renderLabel={({ route, focused }) =>
-      <Text
-        style={{
-          fontFamily: "Poppins-Medium",
-          color: focused ? "#020202" : "#8D92A3"
-        }}
-      >
-        {route.title}
-      </Text>}
-  />;
+    indicatorStyle={styles.tabIndicator}
+    style={styles.tabBarStyle}
+    tabStyle={styles.tabStyle}
+    renderLabel={({route, focused}) => (
+      <Text style={styles.tabText(focused)}>{route.title}</Text>
+    )}
+  />
+);
 
 const InProgress = () => {
-  const navigation =useNavigation();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {inProgress} = useSelector((state) => state.orderReducer);
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    dispatch(getInProgress());
+  }, []);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(getInProgress());
+    setRefreshing(false);
+  };
+
   return (
-    <View style={{ paddingTop: 8, paddingHorizontal:24 }}>
-      <ItemListFood 
-      rating={4}
-        image={FoodDummy1}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="in-progress"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-      />
-      <ItemListFood 
-      rating={4}
-        image={FoodDummy2}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="in-progress"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-      />
-      <ItemListFood 
-      rating={4}
-        image={FoodDummy3}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="in-progress"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-      />
-      <ItemListFood 
-      rating={4}
-        image={FoodDummy4}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="in-progress"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-      />
-    </View>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
+      <View style={styles.containerInProgress}>
+        {inProgress.map((order) => {
+          return (
+            <ItemListFood
+              key={order.id}
+              image={{uri: order.food.picturePath}}
+              onPress={() => navigation.navigate('OrderDetail', order)}
+              type="in-progress"
+              items={order.quantity}
+              price={order.total}
+              name={order.food.name}
+            />
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 };
 
 const PastOrders = () => {
-  const navigation =useNavigation();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {pastOrders} = useSelector((state) => state.orderReducer);
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    dispatch(getPastOrders());
+  }, []);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(getPastOrders());
+    setRefreshing(false);
+  };
+
   return (
-    <View style={{ paddingTop: 8 , paddingHorizontal:24}}>
-      <ItemListFood 
-      rating={3}
-        image={FoodDummy4}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="past-orders"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-        date="Jun 12, 14:00"
-    
-      />
-      <ItemListFood 
-      rating={3}
-        image={FoodDummy3}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="past-orders"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-        date="Jun 12, 14:00"
-        status="Cancel"
-      />
-      <ItemListFood 
-      rating={3}
-        image={FoodDummy2}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="past-orders"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-        date="Jun 12, 14:00"
-        status="Sent"
-      />
-      <ItemListFood 
-      rating={3}
-        image={FoodDummy1}
-        onPress={() => navigation.navigate("OrderDetail")}
-        type="past-orders"
-        items={3}
-        price="2.000.000"
-        name="Sop Bumil"
-      />
-    </View>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
+      <View style={styles.containerPastOrders}>
+        {pastOrders.map((order) => {
+          return (
+            <ItemListFood
+              key={order.id}
+              image={{uri: order.food.picturePath}}
+              onPress={() => navigation.navigate('OrderDetail', order)}
+              type="past-orders"
+              items={order.quantity}
+              price={order.total}
+              name={order.food.name}
+              date={order.created_at}
+              status={order.status}
+            />
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 };
 
-
-const initialLayout = { width: Dimensions.get("window").width };
+const initialLayout = {width: Dimensions.get('window').width};
 
 const OrderTabSection = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "1", title: "In Progress" },
-    { key: "2", title: "Past Order" }
-   
+    {key: '1', title: 'In Progress'},
+    {key: '2', title: 'Past Orders'},
   ]);
 
   const renderScene = SceneMap({
     1: InProgress,
     2: PastOrders,
-
   });
+
   return (
     <TabView
       renderTabBar={renderTabBar}
-      navigationState={{ index, routes }}
+      navigationState={{index, routes}}
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
-      style={{ backgroundColor: "white" }}
+      style={styles.tabView}
     />
   );
 };
 
 export default OrderTabSection;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tabView: {backgroundColor: 'white'},
+  tabIndicator: {
+    backgroundColor: '#020202',
+    height: 3,
+    width: '15%',
+    marginLeft: '3%',
+  },
+  tabBarStyle: {
+    backgroundColor: 'white',
+    elevation: 0,
+    shadowOpacity: 0,
+    borderBottomColor: '#F2F2F2',
+    borderBottomWidth: 1,
+  },
+  tabStyle: {width: 'auto'},
+  tabText: (focused) => ({
+    fontFamily: 'Poppins-Medium',
+    color: focused ? '#020202' : '#8D92A3',
+  }),
+  containerInProgress: {paddingTop: 8, paddingHorizontal: 24},
+  containerPastOrders: {paddingTop: 8, paddingHorizontal: 24},
+});
